@@ -48,6 +48,18 @@ class UserSerializer(serializers.ModelSerializer):
         return data
 
 
+class MyProfileSerializer(serializers.ModelSerializer):
+    referrals = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = ("phone_number", "invite_code",
+                  "activated_invite_code", "referrals")
+
+    def get_referrals(self, obj):
+        return list(obj.get_referred_users().values_list("phone_number", flat=True))
+
+
 class RequestCodeSerializer(serializers.Serializer):
     phone_number = serializers.CharField()
 

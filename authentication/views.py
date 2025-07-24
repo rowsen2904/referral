@@ -11,6 +11,7 @@ from .serializers import (
     RequestCodeSerializer,
     UserSerializer,
     VerifyCodeSerializer,
+    MyProfileSerializer,
 )
 from .models import User
 
@@ -27,7 +28,7 @@ class MyProfileView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        serializer = UserSerializer(request.user)
+        serializer = MyProfileSerializer(request.user)
         return Response(serializer.data)
 
 
