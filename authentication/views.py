@@ -27,6 +27,9 @@ class UserListView(ListAPIView):
 class MyProfileView(APIView):
     permission_classes = [IsAuthenticated]
 
+    def get_serializer_class(self):
+        return MyProfileSerializer
+
     def get(self, request):
         serializer = MyProfileSerializer(request.user)
         return Response(serializer.data)
@@ -34,6 +37,9 @@ class MyProfileView(APIView):
 
 class ActivateInviteCodeView(APIView):
     permission_classes = [IsAuthenticated]
+
+    def get_serializer_class(self):
+        return ActivateInviteCodeSerializer
 
     def post(self, request):
         serializer = ActivateInviteCodeSerializer(
@@ -47,6 +53,9 @@ class ActivateInviteCodeView(APIView):
 class MyRefferalsView(APIView):
     permission_classes = [IsAuthenticated]
 
+    def get_serializer_class(self):
+        return UserSerializer
+
     def get(self, request):
         user = request.user
         refferals = user.get_referred_users()
@@ -55,6 +64,9 @@ class MyRefferalsView(APIView):
 
 
 class RequestCodeView(APIView):
+    def get_serializer_class(self):
+        return RequestCodeSerializer
+
     def post(self, request):
         serializer = RequestCodeSerializer(data=request.data)
         if serializer.is_valid():
@@ -64,6 +76,9 @@ class RequestCodeView(APIView):
 
 
 class VerifyCodeView(APIView):
+    def get_serializer_class(self):
+        return VerifyCodeSerializer
+
     def post(self, request):
         serializer = VerifyCodeSerializer(data=request.data)
         if serializer.is_valid():

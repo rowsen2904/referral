@@ -1,7 +1,10 @@
 import random
 import time
+from typing import List
+
 from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
+from drf_spectacular.utils import extend_schema_field
 
 from .models import AuthCode, User
 from helpers.validation import validate_russian_phone
@@ -56,6 +59,7 @@ class MyProfileSerializer(serializers.ModelSerializer):
         fields = ("phone_number", "invite_code",
                   "activated_invite_code", "referrals")
 
+    @extend_schema_field(serializers.ListField(child=serializers.CharField()))
     def get_referrals(self, obj):
         return list(obj.get_referred_users().values_list("phone_number", flat=True))
 
