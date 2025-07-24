@@ -18,8 +18,8 @@
 ## ⚙️ Установка и запуск
 
 ```bash
-git clone https://github.com/rowsen2904/refferal-system
-cd refferal-system
+git clone https://github.com/rowsen2904/https://github.com/rowsen2904/referral
+cd referral
 
 python -m venv venv
 source venv/bin/activate
