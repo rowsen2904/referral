@@ -27,3 +27,13 @@ class ActivateInviteCodeView(APIView):
             serializer.save()
             return Response({"message": _("Invite code successfully activated")})
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class MyRefferalsView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        refferals = user.get_referred_users()
+        serializer = UserSerializer(refferals, many=True)
+        return Response(serializer.data)
