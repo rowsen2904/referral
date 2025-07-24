@@ -58,3 +58,15 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.phone_number
+
+
+class AuthCode(models.Model):
+    """
+    I should use Redis for this. Not relational database.
+    """
+    phone_number = models.CharField(max_length=20)
+    code = models.CharField(max_length=4)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.phone_number} — {self.code}"
