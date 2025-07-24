@@ -10,8 +10,7 @@
 - Django 4.x
 - Django REST Framework
 - Simple JWT
-- SQLite (по умолчанию)
-- (опционально) Docker
+- PostgreSQL
 
 ---
 
