@@ -29,3 +29,14 @@ class ActivateInviteCodeSerializer(serializers.Serializer):
         user.activated_invite_code = code
         user.save()
         return user
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['phone_number', 'invite_code', 'activated_invite_code']
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['phone_number'] = instance.phone_number
+        return data
