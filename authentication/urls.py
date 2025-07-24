@@ -3,6 +3,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from .views import (
     ActivateInviteCodeView,
+    MyProfileView,
     MyRefferalsView,
     RequestCodeView,
     UserListView,
@@ -13,6 +14,7 @@ urlpatterns = [
     path('profile/activate-invite/',
          ActivateInviteCodeView.as_view(), name='activate-invite'),
     path('profiles/', UserListView.as_view(), name='user-list'),
+    path('profile/', MyProfileView.as_view(), name='my-profile'),
     path('profile/my-refferals/',
          MyRefferalsView.as_view(), name='my-refferals'),
     path('request-code/', RequestCodeView.as_view()),

@@ -23,6 +23,14 @@ class UserListView(ListAPIView):
     serializer_class = UserSerializer
 
 
+class MyProfileView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data)
+
+
 class ActivateInviteCodeView(APIView):
     permission_classes = [IsAuthenticated]
 
