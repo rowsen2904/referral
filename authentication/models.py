@@ -1,21 +1,9 @@
-import random
-import re
-import string
-
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
-from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
-
-def generate_invite_code(length=6):
-    return ''.join(random.choices(string.ascii_uppercase + string.digits, k=length))
-
-
-def validate_russian_phone(value):
-    if not re.fullmatch(r'^\+7\d{10}$', value):
-        raise ValidationError(
-            _("The number must be in the format: +7XXXXXXXXXX"))
+from helpers.utils import generate_invite_code
+from helpers.validation import validate_russian_phone
 
 
 class UserManager(BaseUserManager):
@@ -23,7 +11,7 @@ class UserManager(BaseUserManager):
         if not phone_number:
             raise ValueError(_('Phone number is required'))
         user = self.model(phone_number=phone_number, **extra_fields)
-        user.set_unusable_password()  # пароль не нужен
+        user.set_unusable_password()
         user.save()
         return user
 
