@@ -4,6 +4,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=30),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
+}
+
 # Django Debug Toolbar
 try:
     import debug_toolbar
